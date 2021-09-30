@@ -12,7 +12,5 @@ public class Stream {
       .map(Animal::toString)
       .sorted()
       .collect(Collectors.joining(", ")));
-
-
   }
 }
