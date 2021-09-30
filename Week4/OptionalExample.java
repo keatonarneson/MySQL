@@ -5,44 +5,34 @@ import java.util.Optional;
 
 public class OptionalExample {
   public static void main(String[] args) throws Exception {
-    Animal emptyAnimal = new Animal();
     Animal catAnimal = new Animal("cat");
 
-    Optional<Animal> animal = Optional.of(emptyAnimal);
+    Optional<Animal> animalEmpty = Optional.empty();
     Optional<Animal> cat = Optional.of(catAnimal);
 
+    System.out.println("Unwrapped Animal Object:");
     methodB(cat);
-    methodB(animal);
 
-    
+    System.out.println("Empty Optional:");
+    methodB(animalEmpty);
   }
   
   public static Animal methodA(Optional<Animal> optionalAnimal) throws NoSuchElementException {
     if (optionalAnimal.isPresent()) {
       return optionalAnimal.get();
     } else {
-      throw new NoSuchElementException("Animal object is missing!");
+      throw new NoSuchElementException("Animal object is missing! (MethodA)");
     }
 
-    // try {
-    //     return optionalAnimal.get();
-    //   } catch (NoSuchElementException e) {
-    //     System.out.println(e.getMessage());
-    //     throw e;
-    //   }
   }
 
   public static Animal methodB(Optional<Animal> animal) {
-    // return methodA().find().orElseThrow(() -> new NoSuchElementException(
-    //   "NO OBJECT FOUND!!!"
-    // ));
-    // methodA(Optional<Animal> emptyAnimal)
-
-    // Animal animal = methodA(Optional<Animal> emptyAnimal).orElseThrow(() -> new NoSuchElementException("MethodB exception"));
 
     try {
+      // animal.orElseThrow(() -> new NoSuchElementException("Animal Object does not exist (MethodB)"));
       System.out.println(methodA(animal));
       return animal.get();
+
     } catch (NoSuchElementException e) {
       System.out.println(e.getMessage());
       throw e;
