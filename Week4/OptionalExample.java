@@ -17,25 +17,17 @@ public class OptionalExample {
     methodB(animalEmpty);
   }
   
-  public static Animal methodA(Optional<Animal> optionalAnimal) throws NoSuchElementException {
-    if (optionalAnimal.isPresent()) {
-      return optionalAnimal.get();
-    } else {
-      throw new NoSuchElementException("Animal object is missing! (MethodA)");
-    }
-
+  public static Animal methodA(Optional<Animal> optionalAnimal) {
+    return optionalAnimal.orElseThrow(() -> new NoSuchElementException("Animal object is missing"));
   }
 
-  public static Animal methodB(Optional<Animal> animal) {
+  public static void methodB(Optional<Animal> animal) {
 
     try {
-      // animal.orElseThrow(() -> new NoSuchElementException("Animal Object does not exist (MethodB)"));
       System.out.println(methodA(animal));
-      return animal.get();
 
     } catch (NoSuchElementException e) {
       System.out.println(e.getMessage());
-      throw e;
     }
   }
 }
